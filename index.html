@@ -10,13 +10,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>bu takes on blender</h1>
-        </header>
+    <div class="sidebar">
+        <h1>bu takes on blender</h1>
+        <nav>
+            <a href="#take1" class="nav-link active">take 1, music notes</a>
+            <a href="#take2" class="nav-link">take 2, starting the interface</a>
+        </nav>
+    </div>
 
+    <div class="container">
         <main>
-            <article class="blog-post">
+            <article class="blog-post" id="take1">
                 <h2>TAKE 1, music notes</h2>
                 <div class="post-meta">
                     <time datetime="2025-01-27">OCTOBER 14 2025</time>
@@ -63,8 +67,129 @@
                     </div>
                 </div>
             </article>
+
+            <article class="blog-post" id="take2">
+                <h2>take 2, starting the interface</h2>
+                <div class="post-meta">
+                    <time datetime="2025-01-27">october 21 2025</time>
+                </div>
+
+                <div class="post-content">
+                    <p>
+                        interfaces are my comfort – when the process began of experimenting with interface in blender, i knew there was an opportunity for me to establish further comfort in the software. to reiterate, i couldn't be more of a newbie to 3d modeling, it scares me…for this assignment though, i entered the world of a design freelancer, locked in their studio dungeon – often times in the dark – and the brief set up that allows them dissociate from the real world. haha, just jokes, mostly at myself.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take-2-images/image-render-interface-5.png" alt="blender interface screenshot 5">
+                        <p class="image-caption">Notion: my everyday productivity tool, the focus of the dashboard itself</p>
+                    </div>
+
+                    <p>
+                        notion is a tool that i've used since early undergrad despite the many frustrations that i've developed with it. it's not because its a bad experience, i just crave more! with this interface, i wanted a freelancer, a designer perhaps, to have the opportunity to engage with a client who is new to notion, and allow them to communicate seamlessly on their collaborative efforts using a variety of visual indicators. of course, i'd be building within notion's popular database system.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take-2-images/image-render-interface-1.png" alt="blender interface screenshot 1">
+                        <p class="image-caption">pre-texture scene</p>
+                    </div>
+
+                    <p>
+                        as per the assignment guidelines, i started with the room that this interface would be built in – the desk, the chairs, the speakers, the laptop, the monitors– all the basics which every async worker tends to have. in comparison to last week where i was just getting a feel for things, i was able to experiment more with materials, colors, and textures to replicate my own work-space – the place i write this blog post from.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take-2-images/image-render-interface-2.png" alt="blender interface screenshot 2">
+                        <p class="image-caption">messing around with materials, the wood from my studio space!</p>
+                    </div>
+
+                    <p>
+                        in looking at my renders, i definitely would like to learn more about lighting and creating an outside world from within. to add, the windows that you see in my scene (yes, those are windows -__-) don't really have a depth or view to anything beyond the endless canvas. i'd either like to add an image or create some assets to make the room feel more accurate to how it really is.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take-2-images/image-render-interface-3.png" alt="blender interface screenshot 3">
+                        <p class="image-caption">windows!</p>
+                    </div>
+
+                    <p>
+                        in terms of third party resources, i did use blenderkit to source the accurate tech that i needed for my scene – i felt like my skills at this point wouldn't have allowed me to accurately replicate the materials i use on the day to day, so i decided this route worked best. all in all, i look forward to adding the actual interface to my environment soon!
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take-2-images/image-render-interface-4.png" alt="final render">
+                        <p class="image-caption">final render, a dark, moody work space</p>
+                    </div>
+                </div>
+            </article>
         </main>
     </div>
 </body>
+<script>
+// Smooth scroll navigation and active state management
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const blogPosts = document.querySelectorAll('.blog-post');
+    
+    // Smooth scroll for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Update active navigation based on scroll position
+    function updateActiveNav() {
+        let current = '';
+        
+        blogPosts.forEach(post => {
+            const postTop = post.offsetTop;
+            const postHeight = post.offsetHeight;
+            const scrollPosition = window.scrollY + 150; // Increased offset for better detection
+            
+            if (scrollPosition >= postTop && scrollPosition < postTop + postHeight) {
+                current = post.getAttribute('id');
+            }
+        });
+        
+        // Update active states with smooth transition
+        navLinks.forEach(link => {
+            const isActive = link.getAttribute('href') === '#' + current;
+            
+            if (isActive && !link.classList.contains('active')) {
+                link.classList.add('active');
+                link.style.opacity = '1';
+                link.style.transform = 'translateX(5px)';
+            } else if (!isActive && link.classList.contains('active')) {
+                link.classList.remove('active');
+                link.style.opacity = '0.4';
+                link.style.transform = 'translateX(0px)';
+            }
+        });
+    }
+    
+    // Throttled scroll event for better performance
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateActiveNav);
+            ticking = true;
+            setTimeout(() => { ticking = false; }, 50); // Reduced throttle time
+        }
+    }
+    
+    // Initial call and scroll listener
+    updateActiveNav();
+    window.addEventListener('scroll', onScroll);
+});
+</script>
 </html>
 
