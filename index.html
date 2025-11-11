@@ -17,6 +17,7 @@
             <a href="#take2" class="nav-link">take 2, starting the interface</a>
             <a href="#take3" class="nav-link">take 3, final renders + notion</a>
             <a href="#take4" class="nav-link">take 4, reading response</a>
+            <a href="#take5" class="nav-link">take 5, Pattern, rhythm, movement</a>
         </nav>
     </div>
 
@@ -150,7 +151,7 @@
             <article class="blog-post" id="take4">
                 <h2>take 4, reading response</h2>
                 <div class="post-meta">
-                    <time datetime="2025-01-27">503A - Reading Response</time>
+                    <time datetime="2024-11-04">November 4 2025</time>
                 </div>
 
                 <div class="post-content">
@@ -204,6 +205,45 @@
 
                     <p>
                         Truth nuke. Sometimes it feels like going back to fix issues takes longer (and tbh is way less fun) than just being patient with the research stage to inform the MVP.
+                    </p>
+                </div>
+            </article>
+
+            <article class="blog-post" id="take5">
+                <h2>take 5, Pattern, rhythm, movement</h2>
+                <div class="post-meta">
+                    <time datetime="2025-11-10">November 10 2025</time>
+                </div>
+
+                <div class="post-content">
+                    <p>
+                        i encountered many logic, gravity-filled issues throughout the process to inform the final the solution i arrived to. the goal was to add animation to express movement, specifically complex, non-linear movement as per the assignment guidelines.                     </p>
+
+                    <div class="image-block">
+                        <img src="take-5/process-1.png" alt="process 1">
+                        <p class="image-caption">process 1</p>
+                    </div>
+
+                    <div class="image-block">
+                        <img src="take-5/process-2.png" alt="process 2">
+                        <p class="image-caption">process 2</p>
+                    </div>
+
+                    <h3>Problem: Finding Space in a Dynamic Pool</h3>
+
+                    <p>
+                        One of the most interesting challenges in this project was implementing the logic for dropping an album back into the pool and having it naturally find space among the other albums through gravity and physics-based interactions. The initial approach attempted to pre-calculate a target position by selecting a random slot among evenly-spaced album positions. However, this deterministic approach failed because it didn't account for the dynamic, non-uniform arrangement of albums that had already been dropped and settled. The solution was to abandon pre-calculated positioning entirely and instead implement a physics-based system where the falling album naturally finds its place through gravitational forces, collision detection, and reactive interactions with existing albums.
+                    </p>
+
+
+                    <div class="image-block">
+                        <a href="https://buribe13.github.io/pattern-rhythm-movement/" target="_blank" rel="noopener noreferrer">
+                            <img src="take-5/final-result-3.png" alt="final result">
+                        </a>
+                        <p class="image-caption">final result, click image to see project -></p>
+                    </div>
+                    <p>
+                        The system works through a multi-layered physics simulation. Gravity is applied continuously, and the album's position updates each frame based on its velocity. When the album reaches the bottom boundary, it bounces with energy damping, gradually losing momentum until it settles. The critical innovation is the collision detection loop that checks the falling album against every other album in the pool. When a collision is detected, the system calculates the overlap distance and collision angle, then separates the albums by pushing them apart along the collision normal. The falling album's velocity is reflected using a dot product calculation, creating realistic bouncing behavior. Simultaneously, existing albums reactively push away from the falling album when it gets within a reaction distance, creating space proactively rather than waiting for collisions. This dual approach, reactive pushing and collision-based bouncing, ensures the falling album naturally carves out space in the pool. The album settles when its total velocity drops below a threshold and it's resting on the bottom, at which point its final position is preserved, allowing the pool to maintain its organic, physics-driven arrangement rather than forcing a uniform grid layout.
                     </p>
                 </div>
             </article>
@@ -275,6 +315,47 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial call and scroll listener
     updateActiveNav();
     window.addEventListener('scroll', onScroll);
+    
+    // Handle hash fragments on page load
+    function handleHashOnLoad() {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetId = hash.substring(1); // Remove the #
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                // Small delay to ensure page is fully loaded
+                setTimeout(() => {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Update active nav state
+                    updateActiveNav();
+                }, 100);
+            }
+        }
+    }
+    
+    // Handle hash changes (when user clicks a link with hash)
+    window.addEventListener('hashchange', function() {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetId = hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                updateActiveNav();
+            }
+        }
+    });
+    
+    // Handle initial hash on page load
+    handleHashOnLoad();
 });
 </script>
 </html>
