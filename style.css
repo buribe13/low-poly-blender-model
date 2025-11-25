@@ -151,9 +151,20 @@ main {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 0px;
   transition: opacity 0.3s ease;
+}
+
+.image-block video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0px;
+  display: block;
+}
+
+.image-block iframe {
+  box-shadow: none;
 }
 
 .image-block a:hover img {

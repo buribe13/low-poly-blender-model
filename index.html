@@ -18,6 +18,7 @@
             <a href="#take3" class="nav-link">take 3, final renders + notion</a>
             <a href="#take4" class="nav-link">take 4, reading response</a>
             <a href="#take5" class="nav-link">take 5, Pattern, rhythm, movement</a>
+            <a href="#take6" class="nav-link">take 6, Time and oscillation</a>
         </nav>
     </div>
 
@@ -245,6 +246,63 @@
                     <p>
                         The system works through a multi-layered physics simulation. Gravity is applied continuously, and the album's position updates each frame based on its velocity. When the album reaches the bottom boundary, it bounces with energy damping, gradually losing momentum until it settles. The critical innovation is the collision detection loop that checks the falling album against every other album in the pool. When a collision is detected, the system calculates the overlap distance and collision angle, then separates the albums by pushing them apart along the collision normal. The falling album's velocity is reflected using a dot product calculation, creating realistic bouncing behavior. Simultaneously, existing albums reactively push away from the falling album when it gets within a reaction distance, creating space proactively rather than waiting for collisions. This dual approach, reactive pushing and collision-based bouncing, ensures the falling album naturally carves out space in the pool. The album settles when its total velocity drops below a threshold and it's resting on the bottom, at which point its final position is preserved, allowing the pool to maintain its organic, physics-driven arrangement rather than forcing a uniform grid layout.
                     </p>
+                </div>
+            </article>
+
+            <article class="blog-post" id="take6">
+                <h2>take 6, Time and oscillation</h2>
+                <div class="post-meta">
+                    <time datetime="2025-11-24">November 24 2025</time>
+                </div>
+
+                <div class="post-content">
+                    <h3>Assignment Guidelines</h3>
+                    <p>
+                        Create an animation with at least two moving shapes - one moving in a repeated motion (e.g. a pendulum or a rotating planet) and the other performing a movement after a predetermined interval of time has passed. Use trigonometric functions to describe repeated motion, use time function to calculate the interval, de-synchronize the two movements from each other to create complex motion rhythm, and try to use randomness and/or Perlin noise to create organic shapes.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take-6-Time-and-oscillation/static.png" alt="initial static state">
+                        <p class="image-caption">initial static state</p>
+                    </div>
+
+                    <div class="image-block">
+                        <video controls width="100%" preload="metadata" playsinline>
+                            <source src="take-6-Time-and-oscillation/2-animation.mov" type="video/quicktime">
+                            <source src="take-6-Time-and-oscillation/2-animation.mov" type="video/mp4">
+                            <a href="take-6-Time-and-oscillation/2-animation.mov">Download video</a> if it doesn't play.
+                        </video>
+                        <p class="image-caption">process iteration 2 - adding animation</p>
+                    </div>
+
+                    <div class="image-block">
+                        <video controls width="100%" preload="metadata" playsinline>
+                            <source src="take-6-Time-and-oscillation/3-speed.mov" type="video/quicktime">
+                            <source src="take-6-Time-and-oscillation/3-speed.mov" type="video/mp4">
+                            <a href="take-6-Time-and-oscillation/3-speed.mov">Download video</a> if it doesn't play.
+                        </video>
+                        <p class="image-caption">process iteration 3 - adjusting speed</p>
+                    </div>
+
+                    <div class="image-block">
+                        <video controls width="100%" preload="metadata" playsinline>
+                            <source src="take-6-Time-and-oscillation/4-multiple.mov" type="video/quicktime">
+                            <source src="take-6-Time-and-oscillation/4-multiple.mov" type="video/mp4">
+                            <a href="take-6-Time-and-oscillation/4-multiple.mov">Download video</a> if it doesn't play.
+                        </video>
+                        <p class="image-caption">process iteration 4 - adding multiple elements</p>
+                    </div>
+
+                    <div class="image-block">
+                        <img src="take-6-Time-and-oscillation/fin-1.jpeg" alt="final result 1">
+                        <p class="image-caption">final result 1</p>
+                    </div>
+
+                    <div class="image-block">
+                        <img src="take-6-Time-and-oscillation/fin-2.jpeg" alt="final result 2">
+                        <p class="image-caption">final result 2</p>
+                    </div>
+
                 </div>
             </article>
         </main>
