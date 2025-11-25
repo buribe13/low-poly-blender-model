@@ -256,15 +256,24 @@
                 </div>
 
                 <div class="post-content">
-                    <h3>Assignment Guidelines</h3>
                     <p>
-                        Create an animation with at least two moving shapes - one moving in a repeated motion (e.g. a pendulum or a rotating planet) and the other performing a movement after a predetermined interval of time has passed. Use trigonometric functions to describe repeated motion, use time function to calculate the interval, de-synchronize the two movements from each other to create complex motion rhythm, and try to use randomness and/or Perlin noise to create organic shapes.
+                        This project explores the intersection of time-based animation and organic motion through interactive 3D graphics. Using p5.js, I created two distinct shapes with different movement patterns: one with continuous oscillating motion and another with interval-based transformations, all while incorporating Perlin noise to achieve organic, flowing forms.
+                    </p>
+
+                    <h3>Iteration 1: Static 3D Fibonacci Sphere</h3>
+                    <p>
+                        The foundation began with a static Fibonacci sphere—a mathematically elegant distribution of 1000 points across a spherical surface using the golden ratio and golden angle. This structure provides even point distribution without clustering at the poles, creating a perfectly balanced geometric form. At this stage, the sphere remains motionless, serving as a canvas to understand the underlying mathematical structure before introducing movement.
                     </p>
 
                     <div class="image-block">
                         <img src="take-6-Time-and-oscillation/static.png" alt="initial static state">
                         <p class="image-caption">initial static state</p>
                     </div>
+
+                    <h3>Iteration 2: Adding Rotation Animation</h3>
+                    <p>
+                        In the second iteration, I introduced continuous rotation using trigonometric functions. The sphere now rotates on both the Y-axis and X-axis (at half the speed), creating a compound rotation that reveals the three-dimensional nature of the form. The rotation uses rotateY(rotation) and rotateX(rotation * 0.5), with the rotation value incrementing by 0.005 each frame. This creates the repeated, cyclical motion required by the assignment—a perpetual movement that never stops or changes rhythm.
+                    </p>
 
                     <div class="image-block">
                         <video controls width="100%" preload="metadata" playsinline>
@@ -275,6 +284,11 @@
                         <p class="image-caption">process iteration 2 - adding animation</p>
                     </div>
 
+                    <h3>Iteration 3: Adding Speed Control</h3>
+                    <p>
+                        The third iteration introduced user control over the animation speed through an interactive slider. This allows real-time manipulation of the rotation rate from 0 (completely static) to 10 (very fast). The speed parameter multiplies the rotation increment, giving viewers the ability to slow down and appreciate the geometric structure or speed up to see the motion blur. This control panel uses React state management to pass the speed value into the p5.js draw loop without causing re-renders.
+                    </p>
+
                     <div class="image-block">
                         <video controls width="100%" preload="metadata" playsinline>
                             <source src="take-6-Time-and-oscillation/3-speed.mov" type="video/quicktime">
@@ -284,6 +298,11 @@
                         <p class="image-caption">process iteration 3 - adjusting speed</p>
                     </div>
 
+                    <h3>Iteration 4: Adding Wobble and Size Controls</h3>
+                    <p>
+                        Here, the project takes a significant leap by introducing Perlin noise to create organic, breathing movement. The "wobble" parameter uses p.noise() to modulate the radius of each point on the sphere, creating a living, pulsating form that feels biological rather than purely geometric. The noise function samples from a 3D noise space using the point's position and accumulated time, ensuring smooth, continuous deformation. Additionally, a size control was added to scale the entire form, and the wobble can range from 0 (perfect sphere) to 100 (highly distorted organic blob).
+                    </p>
+
                     <div class="image-block">
                         <video controls width="100%" preload="metadata" playsinline>
                             <source src="take-6-Time-and-oscillation/4-multiple.mov" type="video/quicktime">
@@ -292,6 +311,31 @@
                         </video>
                         <p class="image-caption">process iteration 4 - adding multiple elements</p>
                     </div>
+
+                    <h3>Iteration 5: Full Interactive Experience with Two Shapes</h3>
+                    <p>
+                        The final iteration fulfills all assignment requirements by introducing a second shape with distinct movement characteristics:
+                    </p>
+
+                    <p>
+                        <strong>Shape 1: Fibonacci Sphere (Continuous Motion)</strong><br>
+                        Uses trigonometric rotation for repeated, cyclical movement. Incorporates Perlin noise for organic wobbling. Moves continuously and smoothly with no interruptions.
+                    </p>
+
+                    <p>
+                        <strong>Shape 2: Organic Torus Rings (Interval Motion)</strong><br>
+                        Features time-based interval changes every 2 seconds using p.millis() and p.random(). When the 2-second interval passes, a new random offset is generated, causing sudden shifts in the form. Multiple concentric rings create a torus-like structure with sine-wave modulated radii. Also incorporates Perlin noise for organic undulation.
+                    </p>
+
+                    <p>
+                        <strong>De-synchronized Motion</strong><br>
+                        The two shapes move at completely different rhythms: Shape 1 has smooth, continuous oscillation, while Shape 2 has periodic, interval-based jumps every 2 seconds. Both can rotate at controllable speeds, but their internal motion patterns remain distinct.
+                    </p>
+
+                    <p>
+                        <strong>Interactive Controls</strong><br>
+                        The control panel offers five parameters: Mode Toggle (switch between Shape 1 and Shape 2), Points (control the density of the geometric structure, 10-2000 points), Speed (control rotation speed, 0-10), Wobble (control the intensity of Perlin noise distortion, 0-100), Size (scale the entire form, 0.1-3x), and Trails (create motion blur effects for a more organic, ethereal appearance, 0-255).
+                    </p>
 
                     <div class="image-block">
                         <img src="take-6-Time-and-oscillation/fin-1.jpeg" alt="final result 1">
@@ -303,6 +347,16 @@
                         <p class="image-caption">final result 2</p>
                     </div>
 
+                    <h3>Technical Implementation</h3>
+                    <p>
+                        The project uses p5.js in WEBGL mode for 3D rendering, trigonometric functions (Math.sin, Math.cos, rotateY, rotateX) for repeated motion, time functions (p.millis(), deltaTime) for interval-based movements, Perlin noise (p.noise()) for organic shape distortion, React + TypeScript for the interface and state management, and Next.js for the web framework. The animations are de-synchronized through different timing mechanisms: Shape 1 uses frame-by-frame incremental rotation, while Shape 2 uses real-time clock checks for discrete interval changes.
+                    </p>
+
+                    <h3>
+                        <a href="https://time-and-oscillation-6g4fvjcqo-benjamin-uribes-projects.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            Final Result →
+                        </a>
+                    </h3>
                 </div>
             </article>
         </main>
