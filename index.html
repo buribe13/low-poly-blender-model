@@ -20,6 +20,7 @@
             <a href="#take5" class="nav-link">take 5, Pattern, rhythm, movement</a>
             <a href="#take6" class="nav-link">take 6, Time and oscillation</a>
             <a href="#take7" class="nav-link">take 7, Find your interface</a>
+            <a href="#take8" class="nav-link">take 8, refining my interface</a>
         </nav>
     </div>
 
@@ -398,6 +399,165 @@
 
                     <p>
                         you can explore the <a href="https://buribe13.github.io/find-your-interface/prototype/" target="_blank" rel="noopener noreferrer">gesture photobooth prototype</a> and see how it responds to your movements. pinch to capture, experiment with the modes, and let me know if the interaction feels as natural as i hoped it would.
+                    </p>
+                </div>
+            </article>
+
+            <article class="blog-post" id="take8">
+                <h2>take 8, refining my interface</h2>
+                <div class="post-meta">
+                    <time datetime="2025-12-16">DECEMBER 16 2025</time>
+                </div>
+
+                <div class="post-content">
+                    <h3>Retro Photo Booth: Building a High-Fidelity Prototype That You Can Control With Your Body</h3>
+                    
+                    <p>
+                        I set out to build a high-fidelity prototype that feels like a real product, not a mockup: a retro macOS-inspired Photo Booth that you can actually use. The core challenge was balancing three things at once: <strong>look and feel</strong>, <strong>technical implementation</strong>, and <strong>role in life</strong>. The result is an interactive Photo Booth web app that runs in the browser, uses a webcam for real-time video, and treats the user’s body as an input device—<strong>pinch to drag the window</strong> and <strong>smile-with-teeth to trigger the shutter</strong>—with normal mouse/keyboard controls as fallbacks.
+                    </p>
+
+                    <p>
+                        At a glance, the project is a reinterpretation of a familiar tool. Photo Booth is already a cultural object: it’s playful, a little performative, and designed for “moments.” I wanted to preserve that nostalgia while reframing the interaction model. Instead of needing a mouse click at exactly the right time, the system watches for the moment you’re <em>actually ready</em>—the smile—and captures then. Instead of dragging a window with a cursor, you can “grab” the title bar with a pinch gesture and move it around like a physical object on your desktop.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take%208%20images/final-image.jpeg" alt="Final retro photo booth interface">
+                        <p class="image-caption">the final result: a functional, retro-styled photo booth</p>
+                    </div>
+
+                    <h3>Role in Life: “Body as Controller” as a More Natural Interface</h3>
+
+                    <p>
+                        The role-in-life direction for this prototype is simple: <strong>make digital interaction feel closer to everyday physical intention</strong>. In real life, when you take a photo, you don’t think “press the red button now”—you pose, adjust, laugh, and smile. The camera shutter is most meaningful when it responds at the moment you’re expressing what you want to capture. That’s why the primary interaction is <strong>smile-with-teeth capture</strong>.
+                    </p>
+
+                    <p>
+                        The other embodied interaction is <strong>pinch-to-drag</strong>. A pinch gesture is widely understood as “grab.” Mapping that to moving a window is an intuitive bridge between physical action and UI behavior: it’s not just a novelty input—it matches how the interface already behaves conceptually (a window as a movable object).
+                    </p>
+                    
+                    <p>
+                        Because webcam-based embodied input can be messy (lighting, jitter, false positives), I treated “role in life” as not only a concept but also a responsibility: the system needs to be understandable and forgiving. That’s why the prototype includes visible status feedback (“hand tracking,” “face tracking,” smile indicator) and fallback controls (mouse drag, click capture, spacebar).
+                    </p>
+
+                    <h3>Look & Feel: High Fidelity as an Experience, Not a Skin</h3>
+
+                    <p>
+                        The “look and feel” goal wasn’t just to make it pretty—it was to make it believable. The desktop environment uses a classic blue “Leopard-era” vibe: gradients, depth, and a menu bar with a live clock. The app itself is contained inside a classic window chrome with traffic light buttons and a metallic title bar. This matters because it sets the tone before any interaction happens: when you see the UI, you immediately understand the reference and the mood.
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take%208%20images/movable-window.png" alt="Movable window interface">
+                        <p class="image-caption">classic macos vibes with pinch-to-drag functionality</p>
+                    </div>
+
+                    <p>
+                        Inside the window, the Photo Booth area leans into the classic dark stage-like interface. The camera feed becomes the center of gravity, and the controls feel like hardware: a large red capture button, an “Effects” mode, and a gallery strip. The UI is meant to invite playful experimentation—switching filters, taking photos, and collecting results—without breaking the illusion of a “real” desktop app.
+                    </p>
+
+                    <p>
+                        High fidelity also meant sweating the micro-interactions: hover states, selection outlines, subtle shadows, and overlays (loading, countdown, flash). Those details are what turn an interface from “a demo” into something that feels complete.
+                    </p>
+
+                    <h3>Technical Implementation: Making the Prototype Actually Work</h3>
+
+                    <p>
+                        Even though the assignment emphasizes “look and feel,” I wanted this prototype to be genuinely functional because that changes how you design. When the camera is real, you have to handle permission errors. When filters run in real time, you have to think about performance. When ML detection controls the UI, you have to design around uncertainty.
+                    </p>
+
+                    <p>
+                        The working system has three core technical pillars:
+                    </p>
+
+                    <p>
+                        1. <strong>Live camera + rendering pipeline</strong><br>
+                        The app requests webcam access, renders a mirrored “selfie” view, and continuously draws frames into canvas elements. From there, filters are applied as pixel operations so the preview feels immediate and tactile.
+                    </p>
+
+                    <p>
+                        2. <strong>Filter browsing + viewing modes</strong><br>
+                        Filters are shown as a grid of live previews (so the user can compare them quickly). You can select a filter and switch into a “single view” where the camera feed is larger and feels more like “the real shot.”
+                    </p>
+
+                    <div class="image-block">
+                        <img src="take%208%20images/nailing=the=effects.png" alt="Effects panel implementation">
+                        <p class="image-caption">nailing the effects panel: real-time filter previews</p>
+                    </div>
+
+                    <p>
+                        3. <strong>Gallery + persistence</strong><br>
+                        Captures aren’t just shown temporarily—they become artifacts: thumbnails appear in a filmstrip, and a dedicated gallery view lets you review, download, and delete. Images are stored using browser storage (IndexedDB), which makes the prototype behave more like an actual application rather than a one-off sketch.
+                    </p>
+
+                    <p>
+                        On top of that, the embodied controls are implemented with ML models running in the browser:
+                    </p>
+                    
+                    <ul>
+                        <li><strong>Hand tracking (pinch)</strong> detects thumb/index landmarks, measures the distance between them, and uses stability rules (hysteresis + consecutive frames) so the pinch state doesn’t flicker.</li>
+                        <li><strong>Face tracking (smile)</strong> computes mouth openness and width ratios and requires several consecutive frames before it triggers a capture, with a cooldown to prevent repeated shots.</li>
+                    </ul>
+
+                    <p>
+                        The key point is that the “technical implementation” isn’t separate from the UX—it <em>is</em> the UX. The thresholds, frame requirements, cooldowns, and status indicators are all design decisions that make embodied input usable instead of frustrating.
+                    </p>
+
+                    <h3>Iteration Process: Building in Working Slices</h3>
+
+                    <p>
+                        I approached iteration by keeping the project <em>running</em> at every stage. Each iteration was a stable “slice” that added a capability without breaking the previous one. This was important because the assignment asks for a fully working version, and embodied/ML features can easily spiral if you don’t keep scope under control.
+                    </p>
+                    
+                    <div class="image-block">
+                        <img src="take%208%20images/issues-with-effects-panel.png" alt="Iteration challenges">
+                        <p class="image-caption">working through layout challenges in the iteration process</p>
+                    </div>
+
+                    <p>
+                        <strong>Iteration 1: Look & Feel (Visual Foundation)</strong><br>
+                        I started by building the desktop environment and window system: the background, the menu bar, the time display, and the macOS-style window chrome. The goal was to establish a strong “product identity” early, so every later feature would live inside a cohesive world.
+                    </p>
+
+                    <p>
+                        <strong>Iteration 2: Camera + Filters (Core Functionality)</strong><br>
+                        Next I integrated the webcam and built real-time filter previews. This is where the prototype stopped being “a UI” and started being “a tool.” I focused on making the camera feel responsive and making effects exploration fast and fun.
+                    </p>
+
+                    <p>
+                        <strong>Iteration 3: Embodied Control (ML Integration)</strong><br>
+                        Then I added hand tracking and face tracking. This required iteration at a smaller scale: thresholds, stability rules, and UX feedback. The biggest design insight here was that embodied interactions need transparency—users need to see what the system thinks is happening. That’s why the status badges and smile indicator became essential, not decorative.
+                    </p>
+
+                    <p>
+                        <strong>Iteration 4: Gallery + Polish (Completion Loop)</strong><br>
+                        Finally, I added the gallery and “completion loop” features: filmstrip thumbnails, a gallery view, a preview modal, and actions like download/delete. This made the experience feel complete: the user can take photos, see results, keep what they like, and manage artifacts.
+                    </p>
+
+                    <h3>Scope Decisions: Limiting Features to Ship a Complete Experience</h3>
+
+                    <p>
+                        To keep the prototype fully working and high quality, I limited the embodied interaction set to <strong>two primary gestures</strong> (pinch + smile) and invested in making them reliable. Instead of adding more gesture types or extra modes that would introduce more edge cases, I prioritized stability and clarity.
+                    </p>
+
+                    <p>
+                        This scope decision is directly aligned with the prompt: high fidelity is not the same as “lots of features.” High fidelity means coherence, polish, and a believable experience. A smaller set of interactions that works consistently is more valuable than a larger set that fails unpredictably.
+                    </p>
+
+                    <h3>What This Prototype Proves</h3>
+
+                    <p>
+                        This prototype demonstrates that “look and feel” can be deeply integrated with technical implementation and a real-world role. The nostalgic interface isn’t just decoration—it shapes how the user interprets the system. The ML controls aren’t just a trick—they reinforce the idea that interaction can be embodied, playful, and closer to human intention.
+                    </p>
+
+                    <p>
+                        Most importantly, the final version is a working artifact: it captures photos, applies filters in real time, supports multiple input methods, and turns interaction into a small performance. That’s the point of a photo booth—and that’s why “body as controller” fits this role in life so well.
+                    </p>
+                    
+                    <p>
+                        <strong>
+                            <a href="https://buribe13.github.io/refine-my-interface/" target="_blank" rel="noopener noreferrer">
+                                Check out the final site →
+                            </a>
+                        </strong>
                     </p>
                 </div>
             </article>
